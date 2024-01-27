@@ -5,7 +5,7 @@ Persistent
 
 /*
 ====================================================
-Script Tray Menu
+脚本托盘菜单
 ====================================================
 */
 
@@ -17,37 +17,37 @@ A_TrayMenu.Add("E&xit", Exit)
 A_IconTip := "ChatGPT AutoHotkey Utility"
 
 ReloadScript(*) {
-	Reload
+    Reload
 }
 
 Debug(*) {
-	ListLines
+    ListLines
 }
 
 Exit(*) {
-	ExitApp
+    ExitApp
 }
 
 /*
 ====================================================
-Dark mode menu
+黑暗模式菜单
 ====================================================
 */
 
 Class DarkMode {
     Static __New(Mode := 1) => ( ; Mode: Dark = 1, Default (Light) = 0
-        DllCall(DllCall("GetProcAddress", "ptr", DllCall("GetModuleHandle", "str", "uxtheme", "ptr"), "ptr", 135, "ptr"), "int", mode),
-        DllCall(DllCall("GetProcAddress", "ptr", DllCall("GetModuleHandle", "str", "uxtheme", "ptr"), "ptr", 136, "ptr"))
+    DllCall(DllCall("GetProcAddress", "ptr", DllCall("GetModuleHandle", "str", "uxtheme", "ptr"), "ptr", 135, "ptr"), "int", mode),
+    DllCall(DllCall("GetProcAddress", "ptr", DllCall("GetModuleHandle", "str", "uxtheme", "ptr"), "ptr", 136, "ptr"))
     )
 }
 
 /*
 ====================================================
-Variables
+变量
 ====================================================
 */
 
-API_Key := "Your_API_Key_Here"
+API_Key := "sk-0k0fbHJ3U39Zazf1lzxf65n7B3ss0W6J7FXgwEvKgCbM3k9Z"
 API_URL := "https://api.openai.com/v1/chat/completions"
 Status_Message := ""
 Response_Window_Status := "Closed"
@@ -55,72 +55,72 @@ Retry_Status := ""
 
 /*
 ====================================================
-Menus and ChatGPT prompts
+菜单和ChatGPT提示词
 ====================================================
 */
 
 MenuPopup := Menu()
-MenuPopup.Add("&1 - Rephrase", Rephrase)
-MenuPopup.Add("&2 - Summarize", Summarize)
-MenuPopup.Add("&3 - Explain", Explain)
-MenuPopup.Add("&4 - Expand", Expand)
+MenuPopup.Add("&1 - 改写", 改写)
+MenuPopup.Add("&2 - 总结", 总结)
+MenuPopup.Add("&3 - 解释", 解释)
+MenuPopup.Add("&4 - 详述", 详述)
 MenuPopup.Add()
-MenuPopup.Add("&5 - Generate reply", GenerateReply)
-MenuPopup.Add("&6 - Find action items", FindActionItems)
-MenuPopup.Add("&7 - Translate to English", TranslateToEnglish)
+MenuPopup.Add("&5 - 生成回复", 生成回复)
+MenuPopup.Add("&6 - 查找行动项", 查找行动项)
+MenuPopup.Add("&7 - 翻译为中文", 翻译为中文)
 
-Rephrase(*) {
-    ChatGPT_Prompt := "Rephrase the following text or paragraph to ensure clarity, conciseness, and a natural flow. The revision should preserve the tone, style, and formatting of the original text. Additionally, correct any grammar and spelling errors you come across:"
-    Status_Message := "Rephrasing..."
-    API_Model := "gpt-4"
-    ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
-}
-
-Summarize(*) {
-    ChatGPT_Prompt := "Summarize the following:"
-    Status_Message := "Summarizing..."
-    API_Model := "gpt-4"
-    ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
-}
-
-Explain(*) {
-    ChatGPT_Prompt := "Explain the following:"
-    Status_Message := "Explaining..."
+改写(*) {
+    ChatGPT_Prompt := "对以下文本或段落进行改写，确保内容清晰、简洁并具有自然的语境连贯性。改写过程中应保留原文的语气、风格和格式，并在此基础上纠正遇到的所有语法和拼写错误："
+    Status_Message := "正在进行改写..." 
     API_Model := "gpt-3.5-turbo"
     ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
 }
 
-Expand(*) {
-    ChatGPT_Prompt := "Considering the original tone, style, and formatting, please help me express the following idea in a clearer and more articulate way. The style of the message could be formal, informal, casual, empathetic, assertive, or persuasive, depending on the context of the original message. The text should be divided into paragraphs for readability. No specific language complexities need to be avoided and the focus should be equally distributed throughout the message. There's no set minimum or maximum length. Here's what I'm trying to say:"
-    Status_Message := "Expanding..."
-    API_Model := "gpt-4"
-    ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
-}
-
-GenerateReply(*) {
-    ChatGPT_Prompt := "Craft a response to any given message. The response should adhere to the original sender's tone, style, formatting, and cultural or regional context. Maintain the same level of formality and emotional tone as the original message. Responses may be of any length, provided they effectively communicate the response to the original sender:"
-    Status_Message := "Generating reply..."
-    API_Model := "gpt-4"
-    ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
-}
-
-FindActionItems(*) {
-    ChatGPT_Prompt := "Find action items that needs to be done and present them in a list:"
-    Status_Message := "Finding action items..."
+总结(*) {
+    ChatGPT_Prompt := "总结以下内容:"
+    Status_Message := "正在进行总结..."
     API_Model := "gpt-3.5-turbo"
     ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
 }
 
-TranslateToEnglish(*) {
-    ChatGPT_Prompt := "Generate an English translation for the following text or paragraph, ensuring the translation accurately conveys the intended meaning or idea without excessive deviation. The translation should preserve the tone, style, and formatting of the original text:"
-    Status_Message := "Translating to English..."
-    API_Model := "gpt-4"
+解释(*) {
+    ChatGPT_Prompt := "解释以下内容:"
+    Status_Message := "正在进行解释..."
+    API_Model := "gpt-3.5-turbo"
+    ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
+}
+
+详述(*) {
+    ChatGPT_Prompt := "考虑到原文的语气、风格和格式，请帮助我以更清晰且表达力更强的方式来阐述以下观点。消息的风格可以根据原文上下文而变化，可以是正式、非正式、随意、富有同情心、坚定或有说服力的。为了便于阅读，文本应分为段落。无需刻意避免特定的语言复杂性，并且信息的重点应在整条消息中均匀分布。没有固定的最小或最大长度限制。下面是我想要表达的内容：" 
+    Status_Message := "正在详述..."
+    API_Model := "gpt-3.5-turbo"
+    ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
+}
+
+生成回复(*) {
+    ChatGPT_Prompt := "针对任意给定的消息创建一个回复。回复应当遵循原始发送者的语气、风格、格式以及文化或地区背景。保持与原始消息相同的正式程度和情感基调。只要能有效地向原始发送者传达回应，回复的长度可任意。"
+    Status_Message := "生成回复中..."
+    API_Model := "gpt-3.5-turbo"
+    ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
+}
+
+查找行动项(*) {
+    ChatGPT_Prompt := "找出需要完成的行动项，并以列表形式呈现："
+    Status_Message := "正在查找行动项..."
+    API_Model := "gpt-3.5-turbo"
+    ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
+}
+
+翻译为中文(*) {
+    ChatGPT_Prompt := "为以下文本或段落生成中文翻译，确保翻译准确传达原文的意图和意义，且无过多偏离。翻译应保持原文的语气、风格及格式。请不要给出除翻译结果外的任何内容：" 
+    Status_Message := "翻译中..."
+    API_Model := "gpt-3.5-turbo"
     ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status)
 }
 
 /*
 ====================================================
-Create Response Window
+创建响应窗口
 ====================================================
 */
 
@@ -128,15 +128,15 @@ Response_Window := Gui("-Caption", "Response")
 Response_Window.BackColor := "0x333333"
 Response_Window.SetFont("s13 cWhite", "Georgia")
 Response := Response_Window.Add("Edit", "r20 ReadOnly w600 Wrap Background333333", Status_Message)
-RetryButton := Response_Window.Add("Button", "x190 Disabled", "Retry")
+RetryButton := Response_Window.Add("Button", "x190 Disabled", "重试")
 RetryButton.OnEvent("Click", Retry)
-CopyButton := Response_Window.Add("Button", "x+30 w80 Disabled", "Copy")
+CopyButton := Response_Window.Add("Button", "x+30 w80 Disabled", "复制")
 CopyButton.OnEvent("Click", Copy)
-Response_Window.Add("Button", "x+30", "Close").OnEvent("Click", Close)
+Response_Window.Add("Button", "x+30", "关闭").OnEvent("Click", Close)
 
 /*
 ====================================================
-Buttons
+按钮
 ====================================================
 */
 
@@ -144,20 +144,20 @@ Retry(*) {
     Retry_Status := "Retry"
     RetryButton.Enabled := 0
     CopyButton.Enabled := 0
-    CopyButton.Text := "Copy"
+    CopyButton.Text := "复制"
     ProcessRequest(Previous_ChatGPT_Prompt, Previous_Status_Message, Previous_API_Model, Retry_Status)
 }
 
 Copy(*) {
     A_Clipboard := Response.Value
     CopyButton.Enabled := 0
-    CopyButton.Text := "Copied!"
+    CopyButton.Text := "已复制!"
 
     DllCall("SetFocus", "Ptr", 0)
     Sleep 2000
 
     CopyButton.Enabled := 1
-    CopyButton.Text := "Copy"
+    CopyButton.Text := "复制"
 }
 
 Close(*) {
@@ -168,7 +168,7 @@ Close(*) {
 
 /*
 ====================================================
-Connect to ChatGPT API and process request
+连接到ChatGPT API并处理请求
 ====================================================
 */
 
@@ -198,7 +198,7 @@ ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status) {
         Response_Window_Status := "Open"
         RetryButton.Enabled := 0
         CopyButton.Enabled := 0
-    }    
+    } 
     DllCall("SetFocus", "Ptr", 0)
 
     global HTTP_Request := ComObject("WinHttp.WinHttpRequest.5.1")
@@ -217,9 +217,9 @@ ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status) {
     try {
         if (HTTP_Request.status == 200) {
             SafeArray := HTTP_Request.responseBody
-	    pData := NumGet(ComObjValue(SafeArray) + 8 + A_PtrSize, 'Ptr')
-	    length := SafeArray.MaxIndex() + 1
-	    JSON_Response := StrGet(pData, length, 'UTF-8')
+            pData := NumGet(ComObjValue(SafeArray) + 8 + A_PtrSize, 'Ptr')
+            length := SafeArray.MaxIndex() + 1
+            JSON_Response := StrGet(pData, length, 'UTF-8')
             var := Jxon_Load(&JSON_Response)
             JSON_Response := var.Get("choices")[1].Get("message").Get("content")
             RetryButton.Enabled := 1
@@ -251,7 +251,7 @@ ProcessRequest(ChatGPT_Prompt, Status_Message, API_Model, Retry_Status) {
 
 /*
 ====================================================
-Cursors
+游标
 ====================================================
 */
 
@@ -275,7 +275,7 @@ LoadingCursor() {
 
 /*
 ====================================================
-Hotkey
+热键
 ====================================================
 */
 
