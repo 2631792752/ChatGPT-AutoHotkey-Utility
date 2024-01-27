@@ -47,7 +47,7 @@ Class DarkMode {
 ====================================================
 */
 
-API_Key := "sk-0k0fbHJ3U39Zazf1lzxf65n7B3ss0W6J7FXgwEvKgCbM3k9Z"
+API_Key := "替换为你的api_key"
 API_URL := "https://api.openai.com/v1/chat/completions"
 Status_Message := ""
 Response_Window_Status := "Closed"
