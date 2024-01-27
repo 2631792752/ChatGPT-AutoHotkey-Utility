@@ -1,6 +1,6 @@
 # ChatGPT-AutoHotkey-Utility
 
-[⏬ Download here](https://github.com/2631792752/ChatGPT-AutoHotkey-Utility/releases/latest)
+[⏬ 在此下载](https://github.com/2631792752/ChatGPT-AutoHotkey-Utility/releases/latest)
 
 一个使用ChatGPT API处理所选文本的AutoHotkey脚本。
 
